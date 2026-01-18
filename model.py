@@ -24,3 +24,6 @@ print(df.isnull().sum())
 df = df.dropna()  # drop missing rows
 
 print(df.isnull().sum())
+
+
+
