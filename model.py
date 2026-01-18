@@ -1,29 +1,40 @@
 #train and predict
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from parser import extract_text
+from features import clean_text
 
-# Load dataset
-df = pd.read_csv("data/resumes/resume_data.csv")  # path to Kaggle CSV
+# Load labels
+labels_df = pd.read_csv("data/labels.csv")
 
-# Quick look
-print(df.head())
+# Extract text from resumes
+texts = []
+roles = []
+for idx, row in labels_df.iterrows():
+    text = extract_text(f"data/resumes/{row['file']}")
+    texts.append(clean_text(text))
+    roles.append(row['role'])
 
-df.columns = df.columns.str.strip()
-print(df.columns)
+# Train/test split
+X_train, X_test, y_train, y_test = train_test_split(texts, roles, test_size=0.2, random_state=42)
 
-df.rename(columns={'﻿job_position_name': 'job_position_name'}, inplace=True)
-df['job_position_name'] = df['job_position_name'].astype(str).str.strip()
-df['job_position_name'] = df['job_position_name'].replace(['', 'nan', 'None'], pd.NA)
+# Pipeline: TF-IDF + Logistic Regression
+model = Pipeline([
+    ("tfidf", TfidfVectorizer(max_features=3000)),
+    ("clf", LogisticRegression(max_iter=1000))
+])
 
-df['job_position_name'].notna().sum()
-df['job_position_name'].value_counts().head(10)
+# Train model
+model.fit(X_train, y_train)
 
-print(df['job_position_name'].value_counts())
+# Evaluate
+from sklearn.metrics import classification_report
+y_pred = model.predict(X_test)
+print(classification_report(y_test, y_pred))
 
-# Check for nulls
-print(df.isnull().sum())
-df = df.dropna()  # drop missing rows
-
-print(df.isnull().sum())
-
-
-
+# Save model
+import joblib
+joblib.dump(model, "resume_classifier.pkl")

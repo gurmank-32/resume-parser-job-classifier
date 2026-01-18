@@ -30,11 +30,3 @@ def clean_text(text):
     tokens = [token.lemma_ for token in doc if not token.is_stop and not token.is_punct]
     return " ".join(tokens)
 
-# Example skills for keyword matching
-SKILLS = ["python", "sql", "tableau", "machine learning", "aws", "excel", "power bi"]
-
-def extract_skills(text):
-    """
-    Extract skills from text using keyword matching.
-    """
-    return [skill for skill in SKILLS if skill in text]
