@@ -15,21 +15,21 @@ This project simulates how Applicant Tracking Systems (ATS) and job-matching pla
 
 ---
 
-🧠 Project Architecture
-Resume (PDF)
-   ↓
-PyPDF2 (Text Extraction)
-   ↓
-spaCy NLP Pipeline (Cleaning & Lemmatization)
-   ↓
-TF-IDF Vectorization
-   ↓
-Logistic Regression Classifier
-   ↓
-Top-3 Job Role Predictions + Skills
-   ↓
-Streamlit Web Application
+### 🧠 Project Architecture
 
+**Resume (PDF)**  
+↓  
+**PyPDF2 (Text Extraction)**  
+↓  
+**spaCy NLP Pipeline (Cleaning & Lemmatization)**  
+↓  
+**TF-IDF Vectorization**  
+↓  
+**Logistic Regression Classifier**  
+↓  
+**Top-3 Job Role Predictions + Skills**  
+↓  
+**Streamlit Web Application**
 
 ---
 
@@ -46,6 +46,20 @@ Streamlit Web Application
 | Deployment     | Streamlit             |
 
 ---
+## 📂 Project Structure
+
+resume-parser-job-classifier/  
+│  
+├── app.py                  # 🌐 Streamlit application  
+├── model.py                # 🧠 Model training script  
+├── parser.py               # 🧹 Resume text extraction & cleaning  
+├── features.py             # 🛠️ Skill extraction & resume stats  
+├── resume_classifier.pkl   # 🤖 Trained ML model  
+├── data/  
+│   └── resumes/  
+│       └── resume_data.csv # 📊 Kaggle dataset  
+├── requirements.txt  
+└── README.md  
 
 ---
 
@@ -111,19 +125,12 @@ Contains structured resume information such as:
 ## 💻 How to Run the Project
 
 1️⃣ **Clone the repository**
-```bash
-git clone https://github.com/your-username/resume-parser-job-classifier.git
-cd resume-parser-job-classifier
 
-2️⃣ ** Install dependencies** 
-```bash
-pip install -r requirements.txt
-python -m spacy download en_core_web_sm
+2️⃣ **Install dependencies**
+   - pip install -r requirements.txt
+   - python -m spacy download en_core_web_sm
 
 3️⃣ **Run the Streamlit app**
-```bash
-streamlit run app.py
+   - streamlit run app.py
 
-4️⃣ ** Open in browser**
-```arduino
-http://localhost:8501
+---
