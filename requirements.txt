@@ -1,8 +1,8 @@
-streamlit
-PyPDF2
-spacy
-scikit-learn
 pandas
+scikit-learn
+streamlit
+joblib
+spacy
+PyPDF2
+matplotlib
 numpy
-
-

@@ -5,7 +5,7 @@ SKILLS = {
     "programming": ["python", "java", "c++", "sql", "r"],
     "data": ["machine learning", "deep learning", "statistics", "pandas", "numpy"],
     "tools": ["tableau", "power bi", "excel", "aws", "git"],
-    "product": ["roadmap", "stakeholders", "user stories", "a/b testing"]
+    "product": ["roadmap", "stakeholders", "user stories","agile", "a/b testing"]
 }
 
 def extract_skills(text):
